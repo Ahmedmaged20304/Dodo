@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عالم دانية التعليمي ✨ | Dania's Learning World</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo, Amiri (for Quran), Fredoka (for English kids) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@500;700;800;900&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti for celebrations -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        arabic: ['Cairo', 'sans-serif'],
+                        quran: ['Amiri', 'serif'],
+                        english: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        candy: {
+                            pink: '#FF6B9E',
+                            lightPink: '#FFF0F6',
+                            purple: '#9B5DE5',
+                            lightPurple: '#F5EEFF',
+                            sky: '#00BBF9',
+                            lightSky: '#E6F8FF',
+                            sun: '#FEE440',
+                            mint: '#00F5D4',
+                        }
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2.5s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pop': 'pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        },
+                        pop: {
+                            '0%': { transform: 'scale(0.85)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #FFF5F8 0%, #F3E8FF 50%, #E0F7FA 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+        }
+        /* Focus cropping on Dania's face and smile */
+        .dania-portrait {
+            object-fit: cover;
+            object-position: center 20%;
+        }
+        .dania-portrait-top {
+            object-fit: cover;
+            object-position: center 15%;
+        }
+        .dania-portrait-mid {
+            object-fit: cover;
+            object-position: center 32%;
+        }
+        .kid-card {
+            box-shadow: 0 8px 0 rgba(155, 93, 229, 0.15), 0 12px 24px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+        }
+        .kid-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 rgba(155, 93, 229, 0.15), 0 6px 12px rgba(0, 0, 0, 0.06);
+        }
+        .kid-btn {
+            box-shadow: 0 5px 0 rgba(0, 0, 0, 0.15);
+            transition: all 0.15s ease;
+        }
+        .kid-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+        }
+        canvas {
+            touch-action: none;
+            cursor: crosshair;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF0F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF6B9E;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="font-arabic text-slate-800 pb-14">
+
+    <!-- ==================== 1. TOP HEADER (PRINCESS DANIA) ==================== -->
+    <header class="bg-white/95 backdrop-blur-md border-b-4 border-pink-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 sm:py-3.5">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+                
+                <!-- Dania Portrait + Crown + Name -->
+                <div class="flex items-center gap-3.5">
+                    <div class="relative group cursor-pointer shrink-0" onclick="openGalleryModal()" title="اضغطي لإدارة صور دانية">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-2xl sm:text-3xl animate-float z-10 drop-shadow">
+                            👑
+                        </div>
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-tr from-candy-pink via-candy-sun to-candy-purple shadow-lg">
+                            <img data-dania-role="header"
+                                 src="95606.jpg"
+                                 onerror="this.src='https://placehold.co/240x240/FFF0F6/FF6B9E?text=Princess+Dania'"
+                                 alt="الأميرة دانية"
+                                 class="w-full h-full rounded-full dania-portrait bg-pink-50 border-2 border-white">
+                        </div>
+                        <span class="absolute bottom-0 right-0 bg-candy-purple text-white text-xs w-6 h-6 rounded-full flex items-center justify-center border-2 border-white shadow">
+                            📷
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="text-xl sm:text-2xl font-black bg-gradient-to-l from-candy-pink to-candy-purple bg-clip-text text-transparent">
+                                الأميرة دانية | <span class="font-english">Princess Dania</span> ✨
+                            </h1>
+                        </div>
+                        <div class="flex items-center gap-2 flex-wrap mt-1">
+                            <span class="text-xs sm:text-sm text-slate-500 font-bold">
+                                عالم دانية التعليمي • <span class="font-english text-purple-600">Dania's Learning World</span>
+                            </span>
+                            <button onclick="openGalleryModal()" class="text-xs bg-pink-100 hover:bg-pink-200 text-pink-800 font-extrabold px-3 py-1 rounded-full transition flex items-center gap-1">
+                                <span>صور دانية</span>
+                                <span>🖼️</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stars & Badges Counter -->
+                <div class="flex items-center gap-3 bg-gradient-to-r from-amber-50 via-yellow-50 to-pink-50 px-4 py-2 rounded-2xl border-2 border-amber-300 shadow-inner">
+                    <div class="text-center px-2">
+                        <div class="flex items-center justify-center gap-1 text-xl sm:text-2xl font-black text-amber-500">
+                            <span>⭐</span>
+                            <span id="star-count">0</span>
+                        </div>
+                        <span class="text-[11px] font-bold text-amber-800">نجوم دانية</span>
+                    </div>
+                    <div class="h-8 w-0.5 bg-amber-200"></div>
+                    <div class="text-center px-2">
+                        <div class="text-base sm:text-lg font-black text-purple-600" id="level-badge">
+                            🌸 أميرة دانية المبدعة
+                        </div>
+                        <span class="text-[11px] font-bold text-purple-700">اللقب الحالي</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== NAVIGATION TABS ==================== -->
+    <nav class="max-w-6xl mx-auto px-4 pt-5 pb-2">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
+            <button onclick="switchSection('home')" id="nav-home" class="nav-tab kid-btn flex flex-col items-center justify-center p-3 rounded-2xl bg-gradient-to-r from-candy-pink to-candy-purple text-white font-extrabold border-2 border-pink-300">
+                <span class="text-2xl mb-0.5">🏰</span>
+                <span class="text-xs sm:text-sm">قصر دانية</span>
+            </button>
+
+            <button onclick="switchSection('arabic')" id="nav-arabic" class="nav-tab kid-btn flex flex-col items-center justify-center p-3 rounded-2xl bg-white text-slate-700 hover:bg-pink-50 font-extrabold border-2 border-pink-200">
+                <span class="text-xl sm:text-2xl mb-0.5">أ ب ت</span>
+                <span class="text-xs sm:text-sm">الحروف العربية</span>
+            </button>
+
+            <button onclick="switchSection('english')" id="nav-english" class="nav-tab kid-btn flex flex-col items-center justify-center p-3 rounded-2xl bg-white text-slate-700 hover:bg-purple-50 font-extrabold border-2 border-purple-200">
+                <span class="text-xl sm:text-2xl mb-0.5 font-english">A B C</span>
+                <span class="text-xs sm:text-sm">English ABC</span>
+            </button>
+
+            <button onclick="switchSection('numbers')" id="nav-numbers" class="nav-tab kid-btn flex flex-col items-center justify-center p-3 rounded-2xl bg-white text-slate-700 hover:bg-sky-50 font-extrabold border-2 border-sky-200">
+                <span class="text-xl sm:text-2xl mb-0.5">١٢٣ • 123</span>
+                <span class="text-xs sm:text-sm">الأرقام والعدّ</span>
+            </button>
+
+            <button onclick="switchSection('quran')" id="nav-quran" class="nav-tab kid-btn flex flex-col items-center justify-center p-3 rounded-2xl bg-white text-slate-700 hover:bg-emerald-50 font-extrabold border-2 border-emerald-200">
+                <span class="text-2xl mb-0.5">📖</span>
+                <span class="text-xs sm:text-sm">القرآن الكريم</span>
+            </button>
+
+            <button onclick="switchSection('board')" id="nav-board" class="nav-tab kid-btn flex flex-col items-center justify-center p-3 rounded-2xl bg-white text-slate-700 hover:bg-amber-50 font-extrabold border-2 border-amber-200">
+                <span class="text-2xl mb-0.5">🎨</span>
+                <span class="text-xs sm:text-sm">مرسم دانية</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+    <main class="max-w-6xl mx-auto px-4 pt-4">
+
+        <!-- ================= 2. HOME / WELCOME PALACE ================= -->
+        <section id="sec-home" class="space-y-6">
+            <!-- Hero Welcome Card with Dania in Purple Party Dress -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border-4 border-purple-200 shadow-xl relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Portrait Frame -->
+                    <div class="lg:col-span-5 flex flex-col items-center">
+                        <div class="relative">
+                            <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-4xl animate-bounce-slow z-10">👑</div>
+                            <div class="w-56 h-56 sm:w-64 sm:h-64 rounded-full p-2 bg-gradient-to-tr from-candy-purple via-candy-pink to-candy-sun shadow-2xl">
+                                <img data-dania-role="welcome"
+                                     src="99793.heic"
+                                     onerror="this.src='95606.jpg'"
+                                     alt="الأميرة دانية بفستان الحفلة"
+                                     class="w-full h-full rounded-full dania-portrait-mid border-4 border-white bg-purple-50">
+                            </div>
+                            <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap bg-gradient-to-r from-candy-pink to-candy-purple text-white font-black text-sm px-5 py-1.5 rounded-full shadow-md border-2 border-white">
+                                ✨ Princess Dania • الأميرة دانية ✨
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Welcome Text & Quick Launchers -->
+                    <div class="lg:col-span-7 text-center lg:text-right space-y-4">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 text-purple-800 font-extrabold text-xs sm:text-sm">
+                            <span>🌸 مرحباً بكِ في عالمكِ السحري</span>
+                            <span>•</span>
+                            <span class="font-english">Welcome to Dania's World</span>
+                        </div>
+
+                        <h2 class="text-2xl sm:text-4xl font-black text-slate-800 leading-tight">
+                            أهلاً يا أجمل أميرة <span class="text-candy-pink">دانية</span>! 💖
+                        </h2>
+
+                        <p class="text-sm sm:text-base text-slate-600 font-semibold leading-relaxed">
+                            هذا الموقع صُمم خصيصاً لكِ يا <strong class="text-purple-700">دانية</strong>! هيا نلعب ونتعلم معاً الحروف العربية والإنجليزية، ونعدّ الأرقام، ونحفظ سور القرآن الكريم الجميلة، ونرسم أحلى اللوحات!
+                        </p>
+
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-1">
+                            <button onclick="playWelcomeVoice()" class="px-5 py-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-amber-950 font-black text-sm sm:text-base kid-btn flex items-center gap-2">
+                                <span>🔊 اسمعي رسالة الترحيب يا دانية</span>
+                            </button>
+                            <button onclick="switchSection('arabic')" class="px-5 py-3 rounded-2xl bg-candy-pink hover:bg-pink-600 text-white font-black text-sm sm:text-base kid-btn flex items-center gap-2">
+                                <span>🚀 ابدئي الرحلة الآن</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Magical Photo Album of Dania -->
+            <div class="bg-white/90 rounded-3xl p-6 border-4 border-pink-200 shadow-md">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                    <div>
+                        <h3 class="text-xl font-black text-purple-800">📸 ألبوم ذكريات وصور الأميرة دانية</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 font-semibold">اضغطي على أي صورة لترقص النجوم وتسمعي تشجيعاً خاصاً!</p>
+                    </div>
+                    <button onclick="openGalleryModal()" class="px-4 py-2 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-800 font-extrabold text-xs sm:text-sm kid-btn">
+                        + إضافة أو تبديل الصور 🖼️
+                    </button>
+                </div>
+
+                <div id="dania-album-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                    <!-- Populated via JS with all Dania's uploaded photos -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 3. ARABIC LETTERS (أ - ي) ================= -->
+        <section id="sec-arabic" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-pink-200 shadow-lg">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Letter Card & Audio -->
+                    <div class="lg:col-span-5 flex flex-col items-center text-center bg-gradient-to-b from-pink-50 to-purple-50 p-6 rounded-3xl border-2 border-pink-200">
+                        <span class="px-3 py-1 rounded-full bg-pink-200/70 text-pink-800 text-xs font-bold mb-2">
+                            اضغطي على الحرف لسماع صوته 🔊
+                        </span>
+                        
+                        <button onclick="speakCurrentArabic()" class="group relative my-2 w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-white border-4 border-candy-pink shadow-md flex items-center justify-center hover:scale-105 transition-transform">
+                            <span id="ar-big-letter" class="text-8xl sm:text-9xl font-black text-candy-pink leading-none pb-3">أ</span>
+                            <span class="absolute bottom-2 right-2 text-xl bg-pink-100 p-1.5 rounded-full">🔊</span>
+                        </button>
+
+                        <div class="mt-3 flex items-center justify-center gap-3 bg-white px-4 py-2.5 rounded-2xl border border-pink-200 shadow-xs">
+                            <span id="ar-word-emoji" class="text-4xl">🐰</span>
+                            <div class="text-right">
+                                <div id="ar-word-text" class="text-2xl font-black text-purple-700">أَرْنَب</div>
+                                <div id="ar-letter-name" class="text-xs font-bold text-slate-500">حرف الألف</div>
+                            </div>
+                            <button onclick="speakText(currentArObj.word, 'ar-SA')" class="mr-2 bg-amber-300 hover:bg-amber-400 text-amber-950 font-bold px-3 py-1.5 rounded-xl text-sm kid-btn">
+                                انطق 🗣️
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dania Companion Card + Tracing Canvas -->
+                    <div class="lg:col-span-7 flex flex-col space-y-3">
+                        <!-- Dania Encouraging Strip -->
+                        <div class="flex items-center gap-3.5 bg-gradient-to-l from-pink-100 via-purple-50 to-amber-50 p-3 rounded-2xl border-2 border-pink-200">
+                            <img id="ar-dania-companion"
+                                 src="ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1242.heif"
+                                 onerror="this.src='95606.jpg'"
+                                 alt="دانية تشجعك"
+                                 class="w-16 h-16 sm:w-20 sm:h-20 rounded-full dania-portrait border-4 border-white shadow-md shrink-0">
+                            <div>
+                                <span class="text-xs font-black text-candy-pink uppercase">رفيقة الحروف العربية 🌸</span>
+                                <h2 id="ar-dania-cheer" class="text-base sm:text-lg font-black text-purple-900">
+                                    هيا يا دانية! اكتبي الحرف الجميل بإصبعكِ ✨
+                                </h2>
+                            </div>
+                        </div>
+
+                        <!-- Toolbar -->
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span class="text-xs font-bold text-slate-500 ml-1">لون القلم:</span>
+                                <button onclick="setTraceColor('ar', '#FF6B9E')" class="w-7 h-7 rounded-full bg-[#FF6B9E] border-2 border-white shadow ring-2 ring-pink-300"></button>
+                                <button onclick="setTraceColor('ar', '#9B5DE5')" class="w-7 h-7 rounded-full bg-[#9B5DE5] border-2 border-white shadow"></button>
+                                <button onclick="setTraceColor('ar', '#00BBF9')" class="w-7 h-7 rounded-full bg-[#00BBF9] border-2 border-white shadow"></button>
+                                <button onclick="setTraceColor('ar', '#10B981')" class="w-7 h-7 rounded-full bg-[#10B981] border-2 border-white shadow"></button>
+                                <button onclick="setTraceColor('ar', '#F59E0B')" class="w-7 h-7 rounded-full bg-[#F59E0B] border-2 border-white shadow"></button>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="clearTraceCanvas('ar')" class="px-3 py-1.5 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold text-xs sm:text-sm kid-btn">
+                                    مسح 🧹
+                                </button>
+                                <button onclick="rewardTracing('ar')" class="px-4 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm kid-btn">
+                                    أحسنتِ يا دانية! ⭐
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="relative w-full h-60 sm:h-64 bg-amber-50/50 rounded-3xl border-4 border-dashed border-purple-300 overflow-hidden">
+                            <canvas id="ar-trace-canvas" class="w-full h-full block"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Grid of all 28 Arabic Letters -->
+            <div class="bg-white/90 rounded-3xl p-5 border-2 border-pink-200">
+                <h3 class="text-lg font-black text-pink-700 mb-3">اختاري حرفاً من الحروف الأبجدية (٢٨ حرفاً):</h3>
+                <div id="arabic-letters-grid" class="grid grid-cols-4 sm:grid-cols-7 md:grid-cols-10 gap-2.5">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 4. ENGLISH LETTERS (A - Z + D IS FOR DANIA) ================= -->
+        <section id="sec-english" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-purple-200 shadow-lg">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- English Letter Card -->
+                    <div class="lg:col-span-5 flex flex-col items-center text-center bg-gradient-to-b from-purple-50 to-sky-50 p-6 rounded-3xl border-2 border-purple-200">
+                        <div class="flex items-center justify-between w-full mb-2">
+                            <span class="px-3 py-1 rounded-full bg-purple-200/70 text-purple-800 text-xs font-bold font-english">
+                                Tap to listen! 🔊
+                            </span>
+                            <!-- Special Shortcut Button: D is for Dania -->
+                            <button onclick="selectEnglishLetter(3, true)" class="px-3 py-1 rounded-full bg-candy-pink text-white text-xs font-extrabold shadow-xs hover:scale-105 transition font-english">
+                                👑 D is for Dania!
+                            </button>
+                        </div>
+                        
+                        <button onclick="speakCurrentEnglish()" class="group relative my-2 px-8 h-36 sm:h-44 rounded-3xl bg-white border-4 border-candy-purple shadow-md flex items-center justify-center hover:scale-105 transition-transform font-english">
+                            <span id="en-big-letter" class="text-7xl sm:text-8xl font-bold text-candy-purple tracking-wide">D d</span>
+                            <span class="absolute bottom-2 right-2 text-xl bg-purple-100 p-1.5 rounded-full">🔊</span>
+                        </button>
+
+                        <div class="mt-3 flex items-center justify-center gap-3 bg-white px-4 py-2.5 rounded-2xl border border-purple-200 shadow-xs w-full" dir="ltr">
+                            <span id="en-word-emoji" class="text-4xl">👸🏻</span>
+                            <img id="en-dania-word-thumb" src="95606.jpg" alt="Dania" class="w-12 h-12 rounded-full dania-portrait border-2 border-pink-400">
+                            <div class="text-left font-english flex-grow">
+                                <div id="en-word-text" class="text-2xl font-bold text-pink-600">Dania</div>
+                                <div id="en-word-ar" class="text-xs font-arabic font-bold text-slate-500">الأميرة دانية</div>
+                            </div>
+                            <button onclick="speakText(currentEnObj.word, 'en-US')" class="bg-sky-400 hover:bg-sky-500 text-white font-bold px-3 py-1.5 rounded-xl text-sm kid-btn font-english">
+                                Say 🗣️
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dania Garden/School Companion + English Tracing Canvas -->
+                    <div class="lg:col-span-7 flex flex-col space-y-3">
+                        <div class="flex items-center gap-3.5 bg-gradient-to-l from-purple-100 via-sky-50 to-pink-50 p-3 rounded-2xl border-2 border-purple-200">
+                            <img id="en-dania-companion"
+                                 src="ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_15635.jpg"
+                                 onerror="this.src='95606.jpg'"
+                                 alt="Dania in the garden"
+                                 class="w-16 h-16 sm:w-20 sm:h-20 rounded-full dania-portrait border-4 border-white shadow-md shrink-0">
+                            <div>
+                                <span class="text-xs font-black text-purple-600 font-english">English Buddy • صديقتكِ دانية 🌟</span>
+                                <h2 class="text-base sm:text-lg font-black text-slate-800">
+                                    تتبعي الحرف الإنجليزي واكتبيه هنا يا <span class="text-candy-purple">Dania</span>!
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-1.5 flex-wrap">
+                                <span class="text-xs font-bold text-slate-500 ml-1">لون القلم:</span>
+                                <button onclick="setTraceColor('en', '#9B5DE5')" class="w-7 h-7 rounded-full bg-[#9B5DE5] border-2 border-white shadow ring-2 ring-purple-300"></button>
+                                <button onclick="setTraceColor('en', '#FF6B9E')" class="w-7 h-7 rounded-full bg-[#FF6B9E] border-2 border-white shadow"></button>
+                                <button onclick="setTraceColor('en', '#00BBF9')" class="w-7 h-7 rounded-full bg-[#00BBF9] border-2 border-white shadow"></button>
+                                <button onclick="setTraceColor('en', '#10B981')" class="w-7 h-7 rounded-full bg-[#10B981] border-2 border-white shadow"></button>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="clearTraceCanvas('en')" class="px-3 py-1.5 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold text-xs sm:text-sm kid-btn">
+                                    مسح 🧹
+                                </button>
+                                <button onclick="rewardTracing('en')" class="px-4 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm kid-btn font-english">
+                                    Great Job Dania! ⭐
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="relative w-full h-60 sm:h-64 bg-sky-50/50 rounded-3xl border-4 border-dashed border-sky-300 overflow-hidden">
+                            <canvas id="en-trace-canvas" class="w-full h-full block"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- A-Z Grid -->
+            <div class="bg-white/90 rounded-3xl p-5 border-2 border-purple-200" dir="ltr">
+                <h3 class="text-lg font-black text-purple-700 mb-3 text-right font-arabic">اختاري حرفاً إنجليزياً (A - Z):</h3>
+                <div id="english-letters-grid" class="grid grid-cols-4 sm:grid-cols-7 md:grid-cols-9 gap-2.5 font-english">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 5. NUMBERS & BLOCKS (1 - 20) ================= -->
+        <section id="sec-numbers" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-5 sm:p-7 border-4 border-sky-200 shadow-lg">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    
+                    <!-- Number Display & Counting Emojis -->
+                    <div class="lg:col-span-6 flex flex-col items-center text-center bg-gradient-to-b from-sky-50 to-amber-50 p-6 rounded-3xl border-2 border-sky-200">
+                        <div class="flex items-center justify-center gap-4 my-1">
+                            <button onclick="speakText(currentNumObj.arWord, 'ar-SA')" class="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-white border-4 border-candy-sky shadow-md flex flex-col items-center justify-center hover:scale-105 transition">
+                                <span id="num-ar-big" class="text-5xl sm:text-6xl font-black text-sky-600">١</span>
+                                <span id="num-ar-word" class="text-xs font-bold text-slate-500 mt-1">واحِد 🔊</span>
+                            </button>
+
+                            <button onclick="speakText(currentNumObj.enWord, 'en-US')" class="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-white border-4 border-amber-400 shadow-md flex flex-col items-center justify-center hover:scale-105 transition font-english">
+                                <span id="num-en-big" class="text-5xl sm:text-6xl font-bold text-amber-500">1</span>
+                                <span id="num-en-word" class="text-xs font-bold text-slate-500 mt-1">One 🔊</span>
+                            </button>
+                        </div>
+
+                        <!-- Visual Counting Box -->
+                        <div class="w-full mt-4 bg-white p-4 rounded-2xl border-2 border-sky-100">
+                            <p class="text-xs font-bold text-slate-500 mb-2">عدّي مع دانية! (اضغطي على الأشكال للعدّ):</p>
+                            <div id="counting-objects-box" class="flex flex-wrap items-center justify-center gap-2 text-3xl sm:text-4xl min-h-[70px]">
+                                <!-- Emojis injected here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dania Playing with Blocks + Number Writing Canvas -->
+                    <div class="lg:col-span-6 flex flex-col space-y-3">
+                        <div class="flex items-center gap-3.5 bg-gradient-to-l from-sky-100 via-amber-50 to-pink-50 p-3 rounded-2xl border-2 border-sky-200">
+                            <img id="num-dania-companion"
+                                 src="ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1737.heif"
+                                 onerror="this.src='95606.jpg'"
+                                 alt="دانية تلعب بالمكعبات"
+                                 class="w-16 h-16 sm:w-20 sm:h-20 rounded-full dania-portrait-mid border-4 border-white shadow-md shrink-0">
+                            <div>
+                                <span class="text-xs font-black text-sky-700">دانية ومكعبات الأرقام 🧱</span>
+                                <h2 class="text-base sm:text-lg font-black text-slate-800">
+                                    اكتبي الرقم بالعربي والإنجليزي يا <span class="text-sky-600">دانية</span>!
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-end gap-2">
+                            <button onclick="clearTraceCanvas('num')" class="px-3 py-1.5 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold text-xs sm:text-sm kid-btn">
+                                مسح 🧹
+                            </button>
+                            <button onclick="rewardTracing('num')" class="px-4 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm kid-btn">
+                                نجمة العدّ لدانية ⭐
+                            </button>
+                        </div>
+
+                        <div class="relative w-full h-60 sm:h-64 bg-amber-50/40 rounded-3xl border-4 border-dashed border-sky-300 overflow-hidden">
+                            <canvas id="num-trace-canvas" class="w-full h-full block"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Numbers 1-20 Selector Grid -->
+            <div class="bg-white/90 rounded-3xl p-5 border-2 border-sky-200">
+                <h3 class="text-lg font-black text-sky-700 mb-3">اختاري رقماً من ١ إلى ٢٠:</h3>
+                <div id="numbers-grid" class="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-10 gap-2.5">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 6. QURAN CORNER ================= -->
+        <section id="sec-quran" class="hidden space-y-6">
+            <div class="bg-gradient-to-br from-emerald-50 via-teal-50 to-amber-50 rounded-3xl p-5 sm:p-8 border-4 border-emerald-200 shadow-lg">
+                
+                <!-- Header with Dania's Calm Portrait + Surah Selector -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-3.5">
+                        <img data-dania-role="quran"
+                             src="99793.heic"
+                             onerror="this.src='95606.jpg'"
+                             alt="دانية في ركن القرآن"
+                             class="w-16 h-16 sm:w-20 sm:h-20 rounded-full dania-portrait border-4 border-emerald-400 shadow-md shrink-0">
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-black text-emerald-900">📖 ركن القرآن الكريم للأميرة دانية</h2>
+                            <p class="text-xs sm:text-sm text-emerald-700 font-semibold">استمعي للآيات الكريمة وردديها لتحصلي على ٣ نجوم ذهبية 🌟</p>
+                        </div>
+                    </div>
+                    <div id="surah-tabs" class="flex flex-wrap gap-2">
+                        <!-- Surah buttons injected here -->
+                    </div>
+                </div>
+
+                <!-- Surah Display Card -->
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-emerald-200 shadow-inner text-center space-y-5">
+                    <div class="inline-block px-6 py-2 rounded-full bg-emerald-100 border-2 border-emerald-300">
+                        <h3 id="surah-title" class="text-2xl sm:text-3xl font-quran font-bold text-emerald-900">سُورَةُ الفَاتِحَةِ</h3>
+                    </div>
+
+                    <div class="text-xl sm:text-2xl font-quran text-amber-700 font-bold">
+                        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                    </div>
+
+                    <!-- Verses Container -->
+                    <div id="surah-verses" class="space-y-3 max-w-3xl mx-auto">
+                        <!-- Verses injected here -->
+                    </div>
+
+                    <!-- Kid-Friendly Meaning Box -->
+                    <div class="max-w-2xl mx-auto bg-amber-50/90 p-4 rounded-2xl border border-amber-200 text-right">
+                        <span class="text-xs font-black text-amber-800 block mb-1">💡 معنى السورة الجميل لأميرتي دانية:</span>
+                        <p id="surah-meaning" class="text-sm sm:text-base text-slate-700 font-semibold leading-relaxed"></p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+                        <button onclick="readFullSurah()" class="px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base kid-btn flex items-center gap-2">
+                            <span>🔊 استمعي للسورة كاملة</span>
+                        </button>
+                        <button onclick="stopSpeech()" class="px-4 py-3 rounded-2xl bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-sm kid-btn">
+                            إيقاف الصوت ⏹️
+                        </button>
+                        <button onclick="completeSurahReward()" class="px-6 py-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-amber-950 font-extrabold text-base kid-btn flex items-center gap-2">
+                            <span>قرأتها وحفظتها! (+3 ⭐)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 7. ART STUDIO: مرسم الفنانة دانية ================= -->
+        <section id="sec-board" class="hidden space-y-4">
+            <div class="bg-white rounded-3xl p-5 sm:p-6 border-4 border-amber-200 shadow-lg">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                    <div class="flex items-center gap-3.5">
+                        <img data-dania-role="studio"
+                             src="ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_15596.jpg"
+                             onerror="this.src='95606.jpg'"
+                             alt="الفنانة دانية"
+                             class="w-16 h-16 rounded-full dania-portrait border-4 border-amber-400 shadow-md shrink-0">
+                        <div>
+                            <h2 class="text-xl sm:text-2xl font-black text-amber-700">🎨 مرسم الفنانة دانية | Dania's Art Studio</h2>
+                            <p class="text-xs sm:text-sm text-slate-500 font-semibold">اكتبي اسمكِ "دانية - Dania" أو ارسمي لوحة مبهجة واحفظيها!</p>
+                        </div>
+                    </div>
+
+                    <!-- Board Controls -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <button onclick="stampDaniaName()" class="px-3.5 py-2 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-800 font-bold text-xs sm:text-sm kid-btn">
+                            اكتب اسمي ✨
+                        </button>
+                        <button onclick="setFreeBoardEraser()" id="btn-eraser" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm kid-btn">
+                            ممحاة 🧼
+                        </button>
+                        <button onclick="clearFreeBoard()" class="px-3.5 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-700 font-bold text-xs sm:text-sm kid-btn">
+                            مسح 🗑️
+                        </button>
+                        <button onclick="downloadDrawing()" class="px-4 py-2 rounded-xl bg-candy-purple hover:bg-purple-700 text-white font-bold text-xs sm:text-sm kid-btn">
+                            حفظ الرسمة 📸
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Colors & Brush Size Toolbar -->
+                <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-50 p-3 rounded-2xl border border-slate-200 mb-4">
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="text-xs font-bold text-slate-600 ml-1">الألوان:</span>
+                        <button onclick="setFreeColor('#FF6B9E')" class="w-8 h-8 rounded-full bg-[#FF6B9E] border-2 border-white shadow hover:scale-110 transition"></button>
+                        <button onclick="setFreeColor('#9B5DE5')" class="w-8 h-8 rounded-full bg-[#9B5DE5] border-2 border-white shadow hover:scale-110 transition"></button>
+                        <button onclick="setFreeColor('#00BBF9')" class="w-8 h-8 rounded-full bg-[#00BBF9] border-2 border-white shadow hover:scale-110 transition"></button>
+                        <button onclick="setFreeColor('#10B981')" class="w-8 h-8 rounded-full bg-[#10B981] border-2 border-white shadow hover:scale-110 transition"></button>
+                        <button onclick="setFreeColor('#F59E0B')" class="w-8 h-8 rounded-full bg-[#F59E0B] border-2 border-white shadow hover:scale-110 transition"></button>
+                        <button onclick="setFreeColor('#EF4444')" class="w-8 h-8 rounded-full bg-[#EF4444] border-2 border-white shadow hover:scale-110 transition"></button>
+                        <button onclick="setFreeColor('#1E293B')" class="w-8 h-8 rounded-full bg-[#1E293B] border-2 border-white shadow hover:scale-110 transition"></button>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-slate-600">حجم الخط:</span>
+                        <button onclick="setFreeSize(5)" class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-xs font-bold hover:bg-pink-50">رفيع</button>
+                        <button onclick="setFreeSize(10)" class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-xs font-bold hover:bg-pink-50">متوسط</button>
+                        <button onclick="setFreeSize(18)" class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-xs font-bold hover:bg-pink-50">عريض</button>
+                    </div>
+                </div>
+
+                <!-- Art Canvas with Dania's Corner Signature Frame -->
+                <div class="relative w-full h-[380px] sm:h-[440px] bg-white rounded-3xl border-4 border-amber-300 overflow-hidden shadow-inner">
+                    <canvas id="free-board-canvas" class="w-full h-full block"></canvas>
+                    <!-- Corner Badge -->
+                    <div class="pointer-events-none absolute bottom-3 left-3 bg-white/90 backdrop-blur-xs px-3 py-1.5 rounded-full border-2 border-pink-200 flex items-center gap-2 shadow-sm">
+                        <img data-dania-role="header" src="95606.jpg" alt="Dania" class="w-7 h-7 rounded-full dania-portrait border border-pink-400">
+                        <span class="text-xs font-black text-purple-800">لوحة الفنانة دانية ✨</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= 8. CELEBRATION MODAL (WITH DANIA RAISING HANDS) ================= -->
+    <div id="celebration-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 border-4 border-amber-300 shadow-2xl text-center space-y-4 animate-pop">
+            <div class="relative mx-auto w-36 h-36">
+                <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-4xl animate-bounce">👑</div>
+                <img id="celebration-dania-img"
+                     src="ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1074.heif"
+                     onerror="this.src='95606.jpg'"
+                     alt="دانية تحتفل"
+                     class="w-full h-full rounded-full dania-portrait border-4 border-candy-pink shadow-xl">
+                <span id="celebration-stars-pill" class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-950 font-black text-sm px-4 py-1 rounded-full border-2 border-white shadow">
+                    +1 ⭐
+                </span>
+            </div>
+
+            <h3 class="text-2xl font-black text-purple-800">أحسنتِ يا أميرتنا دانية! 🎉</h3>
+            <p id="celebration-message" class="text-sm sm:text-base font-bold text-slate-600">
+                رائعة جداً يا دانية! استمري في التألق والإبداع 💖
+            </p>
+
+            <button onclick="closeCelebrationModal()" class="w-full py-3 rounded-2xl bg-gradient-to-r from-candy-pink to-candy-purple text-white font-black text-base kid-btn">
+                متابعة اللعب والتعلم ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= DANIA PHOTO GALLERY & UPLOAD MANAGER MODAL ================= -->
+    <div id="gallery-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 border-4 border-pink-300 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-pink-100 pb-3">
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-black text-purple-800">🖼️ مكتبة صور الأميرة دانية</h2>
+                    <p class="text-xs text-slate-500 font-semibold">اختاري الصورة الرئيسية للهيدر أو أضيفي صوراً جديدة من جهازكِ</p>
+                </div>
+                <button onclick="closeGalleryModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 font-bold text-slate-600">✕</button>
+            </div>
+
+            <!-- Upload New Photo Button -->
+            <div class="flex flex-wrap items-center justify-between gap-3 bg-pink-50 p-4 rounded-2xl border-2 border-dashed border-pink-300">
+                <div class="text-sm font-bold text-pink-900">
+                    هل لديكِ صورة جديدة لدانية؟ أضيفيها وسيتم حفظها في المتصفح:
+                </div>
+                <label class="cursor-pointer px-4 py-2.5 rounded-xl bg-candy-pink hover:bg-pink-600 text-white font-extrabold text-xs sm:text-sm kid-btn flex items-center gap-2">
+                    <span>📸 رفع صورة من الجهاز</span>
+                    <input type="file" accept="image/*" class="hidden" onchange="handleAddCustomPhoto(event)">
+                </label>
+            </div>
+
+            <!-- Grid of All Available Dania Photos -->
+            <div>
+                <h3 class="text-sm font-extrabold text-slate-700 mb-2.5">اضغطي على أي صورة لتعيينها كصورة رئيسية في الأعلى:</h3>
+                <div id="modal-photos-grid" class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <div class="flex justify-end pt-2 border-t border-slate-100">
+                <button onclick="closeGalleryModal()" class="px-6 py-2.5 rounded-2xl bg-purple-700 text-white font-extrabold text-sm kid-btn">
+                    تم والحفظ ✨
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== DANIA'S UPLOADED PHOTOS COLLECTION ====================
+        const DEFAULT_DANIA_PHOTOS = [
+            {
+                id: 'p1',
+                src: '95606.jpg',
+                title: 'دانية مبتسمة في الحديقة 🌸',
+                caption: 'أجمل ابتسامة للأميرة دانية!',
+                posClass: 'dania-portrait'
+            },
+            {
+                id: 'p2',
+                src: '99793.heic',
+                title: 'دانية بفستان الحفلة البنفسجي 👑',
+                caption: 'أميرة الحفل والزهور!',
+                posClass: 'dania-portrait-mid'
+            },
+            {
+                id: 'p3',
+                src: 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1242.heif',
+                title: 'دانية بالقبعة الوردية الأنيقة 🎀',
+                caption: 'أناقة وجمال الأميرة دانية!',
+                posClass: 'dania-portrait'
+            },
+            {
+                id: 'p4',
+                src: 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1074.heif',
+                title: 'دانية تحتفل وترفع يديها 🎉',
+                caption: 'فرحة النجاح والتفوق!',
+                posClass: 'dania-portrait'
+            },
+            {
+                id: 'p5',
+                src: 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1737.heif',
+                title: 'دانية تبني برج المكعبات 🧱',
+                caption: 'ذكاء وإبداع في العدّ والبناء!',
+                posClass: 'dania-portrait-mid'
+            },
+            {
+                id: 'p6',
+                src: 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_15635.jpg',
+                title: 'دانية تلعب على الأرجوحة 🎠',
+                caption: 'انطلاق ومرح في الحديقة!',
+                posClass: 'dania-portrait-mid'
+            },
+            {
+                id: 'p7',
+                src: 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_15596.jpg',
+                title: 'دانية في الفصل المدرسي 🏫',
+                caption: 'نجمة الفصل المتألقة!',
+                posClass: 'dania-portrait-mid'
+            },
+            {
+                id: 'p8',
+                src: '99897.heic',
+                title: 'دانية تزين البالون البنفسجي 🎈',
+                caption: 'لمسات فنية جميلة!',
+                posClass: 'dania-portrait-mid'
+            },
+            {
+                id: 'p9',
+                src: 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1213.heif',
+                title: 'دانية في مدينة الألعاب 🦒',
+                caption: 'مغامرة ممتعة!',
+                posClass: 'dania-portrait-mid'
+            },
+            {
+                id: 'p10',
+                src: 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1202.jpg',
+                title: 'دانية تصنع الحلوى الوردية 🧁',
+                caption: 'شيف دانية المبدعة!',
+                posClass: 'dania-portrait-mid'
+            }
+        ];
+
+        // ==================== EDUCATIONAL DATA SETS ====================
+        const ARABIC_LETTERS = [
+            { letter: 'أ', name: 'حرف الألف', word: 'أَرْنَب', emoji: '🐰' },
+            { letter: 'ب', name: 'حرف الباء', word: 'بَطَّة', emoji: '🦆' },
+            { letter: 'ت', name: 'حرف التاء', word: 'تُفَّاحَة', emoji: '🍎' },
+            { letter: 'ث', name: 'حرف الثاء', word: 'ثَعْلَب', emoji: '🦊' },
+            { letter: 'ج', name: 'حرف الجيم', word: 'جَمَل', emoji: '🐪' },
+            { letter: 'ح', name: 'حرف الحاء', word: 'حِصَان', emoji: '🐴' },
+            { letter: 'خ', name: 'حرف الخاء', word: 'خَرُوف', emoji: '🐑' },
+            { letter: 'د', name: 'حرف الدال (حرف دانية 👑)', word: 'دَانِيَة', emoji: '👸🏻' },
+            { letter: 'ذ', name: 'حرف الذال', word: 'ذُرَة', emoji: '🌽' },
+            { letter: 'ر', name: 'حرف الراء', word: 'رُمَّان', emoji: '🍓' },
+            { letter: 'ز', name: 'حرف الزاي', word: 'زَرَافَة', emoji: '🦒' },
+            { letter: 'س', name: 'حرف السين', word: 'سَمَكَة', emoji: '🐟' },
+            { letter: 'ش', name: 'حرف الشين', word: 'شَمْس', emoji: '☀️' },
+            { letter: 'ص', name: 'حرف الصاد', word: 'صَقْر', emoji: '🦅' },
+            { letter: 'ض', name: 'حرف الضاد', word: 'ضِفْدَع', emoji: '🐸' },
+            { letter: 'ط', name: 'حرف الطاء', word: 'طَائِرَة', emoji: '✈️' },
+            { letter: 'ظ', name: 'حرف الظاء', word: 'ظَرْف', emoji: '✉️' },
+            { letter: 'ع', name: 'حرف العين', word: 'عُصْفُور', emoji: '🐦' },
+            { letter: 'غ', name: 'حرف الغين', word: 'غَزَال', emoji: '🦌' },
+            { letter: 'ف', name: 'حرف الفاء', word: 'فَرَاشَة', emoji: '🦋' },
+            { letter: 'ق', name: 'حرف القاف', word: 'قِطَّة', emoji: '🐱' },
+            { letter: 'ك', name: 'حرف الكاف', word: 'كَلْب', emoji: '🐶' },
+            { letter: 'ل', name: 'حرف اللام', word: 'لَيْمُون', emoji: '🍋' },
+            { letter: 'م', name: 'حرف الميم', word: 'مَوْز', emoji: '🍌' },
+            { letter: 'ن', name: 'حرف النون', word: 'نَحْلَة', emoji: '🐝' },
+            { letter: 'هـ', name: 'حرف الهاء', word: 'هِلَال', emoji: '🌙' },
+            { letter: 'و', name: 'حرف الواو', word: 'وَرْدَة', emoji: '🌸' },
+            { letter: 'ي', name: 'حرف الياء', word: 'يَد', emoji: '✋' }
+        ];
+
+        const ENGLISH_LETTERS = [
+            { upper: 'A', lower: 'a', word: 'Apple', ar: 'تفاحة', emoji: '🍎' },
+            { upper: 'B', lower: 'b', word: 'Butterfly', ar: 'فراشة', emoji: '🦋' },
+            { upper: 'C', lower: 'c', word: 'Cat', ar: 'قطة', emoji: '🐱' },
+            { upper: 'D', lower: 'd', word: 'Dania', ar: 'الأميرة دانية 👑', emoji: '👸🏻', isDania: true },
+            { upper: 'E', lower: 'e', word: 'Elephant', ar: 'فيل', emoji: '🐘' },
+            { upper: 'F', lower: 'f', word: 'Flower', ar: 'وردة', emoji: '🌸' },
+            { upper: 'G', lower: 'g', word: 'Giraffe', ar: 'زرافة', emoji: '🦒' },
+            { upper: 'H', lower: 'h', word: 'Heart', ar: 'قلب', emoji: '💖' },
+            { upper: 'I', lower: 'i', word: 'Ice Cream', ar: 'آيس كريم', emoji: '🍦' },
+            { upper: 'J', lower: 'j', word: 'Juice', ar: 'عصير', emoji: '🧃' },
+            { upper: 'K', lower: 'k', word: 'Kite', ar: 'طائرة ورقية', emoji: '🪁' },
+            { upper: 'L', lower: 'l', word: 'Lion', ar: 'أسد', emoji: '🦁' },
+            { upper: 'M', lower: 'm', word: 'Moon', ar: 'قمر', emoji: '🌙' },
+            { upper: 'N', lower: 'n', word: 'Nest', ar: 'عش', emoji: '🪺' },
+            { upper: 'O', lower: 'o', word: 'Orange', ar: 'برتقالة', emoji: '🍊' },
+            { upper: 'P', lower: 'p', word: 'Princess Dania', ar: 'الأميرة دانية', emoji: '👑', isDania: true },
+            { upper: 'Q', lower: 'q', word: 'Queen', ar: 'ملكة', emoji: '💎' },
+            { upper: 'R', lower: 'r', word: 'Rainbow', ar: 'قوس قزح', emoji: '🌈' },
+            { upper: 'S', lower: 's', word: 'Star', ar: 'نجمة', emoji: '⭐' },
+            { upper: 'T', lower: 't', word: 'Turtle', ar: 'سلحفاة', emoji: '🐢' },
+            { upper: 'U', lower: 'u', word: 'Umbrella', ar: 'مظلة', emoji: '☂️' },
+            { upper: 'V', lower: 'v', word: 'Violin', ar: 'كمان', emoji: '🎻' },
+            { upper: 'W', lower: 'w', word: 'Whale', ar: 'حوت', emoji: '🐳' },
+            { upper: 'X', lower: 'x', word: 'Xylophone', ar: 'إكسيليفون', emoji: '🎶' },
+            { upper: 'Y', lower: 'y', word: 'Yacht', ar: 'يخت', emoji: '⛵' },
+            { upper: 'Z', lower: 'z', word: 'Zebra', ar: 'حمار وحشي', emoji: '🦓' }
+        ];
+
+        const NUMBERS_DATA = [
+            { val: 1, ar: '١', arWord: 'واحِد', enWord: 'One', emoji: '🍓' },
+            { val: 2, ar: '٢', arWord: 'اثنان', enWord: 'Two', emoji: '🦋' },
+            { val: 3, ar: '٣', arWord: 'ثلاثة', enWord: 'Three', emoji: '🌸' },
+            { val: 4, ar: '٤', arWord: 'أربعة', enWord: 'Four', emoji: '⭐' },
+            { val: 5, ar: '٥', arWord: 'خمسة', enWord: 'Five', emoji: '🍎' },
+            { val: 6, ar: '٦', arWord: 'ستة', enWord: 'Six', emoji: '🎈' },
+            { val: 7, ar: '٧', arWord: 'سبعة', enWord: 'Seven', emoji: '🐥' },
+            { val: 8, ar: '٨', arWord: 'ثمانية', enWord: 'Eight', emoji: '🍬' },
+            { val: 9, ar: '٩', arWord: 'تسعة', enWord: 'Nine', emoji: '🐟' },
+            { val: 10, ar: '١٠', arWord: 'عشرة', enWord: 'Ten', emoji: '💖' },
+            { val: 11, ar: '١١', arWord: 'أحد عشر', enWord: 'Eleven', emoji: '🍒' },
+            { val: 12, ar: '١٢', arWord: 'اثنا عشر', enWord: 'Twelve', emoji: '🌼' },
+            { val: 13, ar: '١٣', arWord: 'ثلاثة عشر', enWord: 'Thirteen', emoji: '🐝' },
+            { val: 14, ar: '١٤', arWord: 'أربعة عشر', enWord: 'Fourteen', emoji: '🍉' },
+            { val: 15, ar: '١٥', arWord: 'خمسة عشر', enWord: 'Fifteen', emoji: '🧁' },
+            { val: 16, ar: '١٦', arWord: 'ستة عشر', enWord: 'Sixteen', emoji: '🎀' },
+            { val: 17, ar: '١٧', arWord: 'سبعة عشر', enWord: 'Seventeen', emoji: '🍊' },
+            { val: 18, ar: '١٨', arWord: 'ثمانية عشر', enWord: 'Eighteen', emoji: '🦄' },
+            { val: 19, ar: '١٩', arWord: 'تسعة عشر', enWord: 'Nineteen', emoji: '🌙' },
+            { val: 20, ar: '٢٠', arWord: 'عشرون', enWord: 'Twenty', emoji: '👑' }
+        ];
+
+        const QURAN_SURAHS = [
+            {
+                id: 'fatiha',
+                name: 'سُورَةُ الفَاتِحَةِ',
+                verses: [
+                    'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿١﴾',
+                    'الرَّحْمَٰنِ الرَّحِيمِ ﴿٢﴾',
+                    'مَالِكِ يَوْمِ الدِّينِ ﴿٣﴾',
+                    'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٤﴾',
+                    'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٥﴾',
+                    'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٦﴾'
+                ],
+                meaning: 'نحمد الله تعالى الذي خلقنا ورزقنا، ونعبده وحده، وندعوه أن يهدينا دائماً إلى طريق الخير والجنة.'
+            },
+            {
+                id: 'ikhlas',
+                name: 'سُورَةُ الإِخْلَاصِ',
+                verses: [
+                    'قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾',
+                    'اللَّهُ الصَّمَدُ ﴿٢﴾',
+                    'لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾',
+                    'وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾'
+                ],
+                meaning: 'تُعلّمنا هذه السورة العظيمة أن الله واحدٌ أحد لا شريك له، وهو الذي يلجأ إليه الجميع في كل حاجاتهم.'
+            },
+            {
+                id: 'falaq',
+                name: 'سُورَةُ الفَلَقِ',
+                verses: [
+                    'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾',
+                    'مِن شَرِّ مَا خَلَقَ ﴿٢﴾',
+                    'وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾',
+                    'وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾',
+                    'وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾'
+                ],
+                meaning: 'نطلب الحماية والأمان من الله ربّ الصبح الجميل ليحفظنا من كل شرٍّ أو أذى في الليل والنهار.'
+            },
+            {
+                id: 'nas',
+                name: 'سُورَةُ النَّاسِ',
+                verses: [
+                    'قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾',
+                    'مَلِكِ النَّاسِ ﴿٢﴾',
+                    'إِلَٰهِ النَّاسِ ﴿٣﴾',
+                    'مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾',
+                    'الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾',
+                    'مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾'
+                ],
+                meaning: 'نحتمي بالله ملك الناس وإلههم ليحفظ قلوبنا وعقولنا من وسوسة الشيطان ويجعلنا في أمان دائم.'
+            },
+            {
+                id: 'kawthar',
+                name: 'سُورَةُ الكَوْثَرِ',
+                verses: [
+                    'إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ ﴿١﴾',
+                    'فَصَلِّ لِرَبِّكَ وَانْحَرْ ﴿٢﴾',
+                    'إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ ﴿٣﴾'
+                ],
+                meaning: 'بشّر الله نبينا محمداً ﷺ بنهر الكوثر في الجنة وبالخير الكثير، وأمره بشكر الله بالصلاة والصدقة.'
+            }
+        ];
+
+        // ==================== STATE ====================
+        let stars = 0;
+        let allPhotos = [...DEFAULT_DANIA_PHOTOS];
+        let headerPhotoSrc = '95606.jpg';
+
+        let currentArObj = ARABIC_LETTERS[0];
+        let currentEnObj = ENGLISH_LETTERS[3]; // Start with D is for Dania!
+        let currentNumObj = NUMBERS_DATA[0];
+        let currentSurahObj = QURAN_SURAHS[0];
+
+        const traceConfigs = {
+            ar: { canvas: null, ctx: null, color: '#FF6B9E', guide: 'أ', font: 'bold 170px Cairo' },
+            en: { canvas: null, ctx: null, color: '#9B5DE5', guide: 'D d', font: 'bold 145px Fredoka' },
+            num: { canvas: null, ctx: null, color: '#00BBF9', guide: '١   1', font: 'bold 140px Cairo' }
+        };
+
+        let freeCanvas, freeCtx;
+        let freeColor = '#FF6B9E';
+        let freeSize = 10;
+        let isErasing = false;
+
+        // ==================== INITIALIZATION ====================
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedState();
+            renderDaniaAlbum();
+            renderArabicGrid();
+            renderEnglishGrid();
+            renderNumbersGrid();
+            renderQuranTabs();
+
+            selectArabicLetter(0, false);
+            selectEnglishLetter(3, false); // D is for Dania
+            selectNumber(0, false);
+            selectSurah(0);
+
+            setupAllCanvases();
+        });
+
+        window.addEventListener('resize', () => {
+            resizeTraceCanvas('ar');
+            resizeTraceCanvas('en');
+            resizeTraceCanvas('num');
+            resizeFreeBoard();
+        });
+
+        // ==================== STORAGE & PHOTO MANAGEMENT ====================
+        function loadSavedState() {
+            try {
+                const savedStars = localStorage.getItem('dania_stars');
+                if (savedStars) stars = parseInt(savedStars, 10) || 0;
+
+                const savedHeaderPhoto = localStorage.getItem('dania_header_photo');
+                if (savedHeaderPhoto) headerPhotoSrc = savedHeaderPhoto;
+
+                const customPhotosRaw = localStorage.getItem('dania_custom_photos');
+                if (customPhotosRaw) {
+                    const customList = JSON.parse(customPhotosRaw);
+                    if (Array.isArray(customList)) {
+                        allPhotos = [...customList, ...DEFAULT_DANIA_PHOTOS];
+                    }
+                }
+            } catch (e) {}
+
+            applyHeaderPhoto(headerPhotoSrc);
+            updateStarsUI();
+        }
+
+        function applyHeaderPhoto(src) {
+            headerPhotoSrc = src;
+            document.querySelectorAll('img[data-dania-role="header"]').forEach(img => {
+                img.src = src;
+            });
+            try {
+                localStorage.setItem('dania_header_photo', src);
+            } catch (e) {}
+        }
+
+        function renderDaniaAlbum() {
+            const albumGrid = document.getElementById('dania-album-grid');
+            albumGrid.innerHTML = allPhotos.map(p => `
+                <div onclick="celebratePhoto('${p.src}', '${p.caption}')"
+                     class="kid-card cursor-pointer group bg-gradient-to-b from-pink-50 to-purple-50 rounded-3xl p-3 border-2 border-pink-200 flex flex-col items-center text-center">
+                    <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-candy-pink to-candy-purple shadow-md overflow-hidden group-hover:scale-105 transition-transform">
+                        <img src="${p.src}"
+                             onerror="this.src='95606.jpg'"
+                             alt="${p.title}"
+                             class="w-full h-full rounded-full ${p.posClass || 'dania-portrait'} border-2 border-white">
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-black text-purple-900 mt-2.5 line-clamp-1">${p.title}</h4>
+                    <span class="text-[11px] font-bold text-pink-600 mt-0.5">${p.caption}</span>
+                </div>
+            `).join('');
+        }
+
+        function celebratePhoto(src, caption) {
+            speakText('ما شاء الله يا دانية! أنتِ أميرة جميلة وذكية', 'ar-SA');
+            openCelebrationModal(src, `${caption} — حفظكِ الله يا أميرتنا دانية 💖`, 0);
+        }
+
+        function openGalleryModal() {
+            renderModalPhotosGrid();
+            const modal = document.getElementById('gallery-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeGalleryModal() {
+            const modal = document.getElementById('gallery-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function renderModalPhotosGrid() {
+            const grid = document.getElementById('modal-photos-grid');
+            grid.innerHTML = allPhotos.map(p => {
+                const isSelected = p.src === headerPhotoSrc;
+                const ringStyle = isSelected ? 'ring-4 ring-candy-pink border-candy-pink bg-pink-50' : 'border-slate-200 hover:border-purple-300';
+                return `
+                    <button type="button" onclick="selectMainAvatar('${p.src}')"
+                        class="p-2 rounded-2xl border-2 ${ringStyle} flex flex-col items-center gap-1.5 transition">
+                        <img src="${p.src}" onerror="this.src='95606.jpg'" alt="${p.title}"
+                             class="w-20 h-20 rounded-full ${p.posClass || 'dania-portrait'} border-2 border-white shadow">
+                        <span class="text-[11px] font-bold text-slate-700 line-clamp-1">${isSelected ? '✓ الصورة الحالية' : p.title}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectMainAvatar(src) {
+            applyHeaderPhoto(src);
+            renderModalPhotosGrid();
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 45, spread: 60, origin: { y: 0.6 } });
+            }
+        }
+
+        function handleAddCustomPhoto(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const c = document.createElement('canvas');
+                    const maxDim = 400;
+                    let w = img.width, h = img.height;
+                    if (w > h) {
+                        if (w > maxDim) { h *= maxDim / w; w = maxDim; }
+                    } else {
+                        if (h > maxDim) { w *= maxDim / h; h = maxDim; }
+                    }
+                    c.width = w;
+                    c.height = h;
+                    c.getContext('2d').drawImage(img, 0, 0, w, h);
+                    const dataUrl = c.toDataURL('image/jpeg', 0.85);
+
+                    const newPhotoObj = {
+                        id: 'custom_' + Date.now(),
+                        src: dataUrl,
+                        title: 'صورة جديدة لدانية ✨',
+                        caption: 'أجمل أميرة دانية!',
+                        posClass: 'dania-portrait'
+                    };
+
+                    allPhotos.unshift(newPhotoObj);
+                    applyHeaderPhoto(dataUrl);
+
+                    try {
+                        const existingCustom = JSON.parse(localStorage.getItem('dania_custom_photos') || '[]');
+                        existingCustom.unshift(newPhotoObj);
+                        localStorage.setItem('dania_custom_photos', JSON.stringify(existingCustom));
+                    } catch (err) {}
+
+                    renderDaniaAlbum();
+                    renderModalPhotosGrid();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ==================== STARS & CELEBRATION MODAL ====================
+        function updateStarsUI() {
+            document.getElementById('star-count').textContent = stars;
+            const badgeEl = document.getElementById('level-badge');
+            if (stars >= 50) badgeEl.textContent = '👑 ملكة العلم والقرآن دانية';
+            else if (stars >= 25) badgeEl.textContent = '🌟 الأميرة دانية المتفوقة';
+            else if (stars >= 10) badgeEl.textContent = '✨ الأميرة دانية الذكية';
+            else badgeEl.textContent = '🌸 أميرة دانية المبدعة';
+        }
+
+        function addStars(amount, customMsg, celebrationImgSrc) {
+            stars += amount;
+            try {
+                localStorage.setItem('dania_stars', stars.toString());
+            } catch (e) {}
+            updateStarsUI();
+            openCelebrationModal(
+                celebrationImgSrc || 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1074.heif',
+                customMsg || `أحسنتِ يا دانية! حصلتِ على +${amount} نجمة ذهبية ⭐`,
+                amount
+            );
+        }
+
+        function openCelebrationModal(imgSrc, message, earnedStars) {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 85,
+                    spread: 75,
+                    origin: { y: 0.6 },
+                    colors: ['#FF6B9E', '#9B5DE5', '#FEE440', '#00BBF9', '#00F5D4']
+                });
+            }
+
+            const imgEl = document.getElementById('celebration-dania-img');
+            imgEl.src = imgSrc;
+            document.getElementById('celebration-message').textContent = message;
+
+            const pill = document.getElementById('celebration-stars-pill');
+            if (earnedStars > 0) {
+                pill.classList.remove('hidden');
+                pill.textContent = `+${earnedStars} ⭐`;
+            } else {
+                pill.classList.add('hidden');
+            }
+
+            const modal = document.getElementById('celebration-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeCelebrationModal() {
+            const modal = document.getElementById('celebration-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function playWelcomeVoice() {
+            speakText('أهلاً وسهلاً بكِ يا أميرتنا الجميلة دانية في عالمكِ التعليمي! هيا نلعب ونتعلم معاً.', 'ar-SA');
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 60, spread: 65, origin: { y: 0.6 } });
+            }
+        }
+
+        // ==================== NAVIGATION ====================
+        function switchSection(secName) {
+            stopSpeech();
+            const sections = ['home', 'arabic', 'english', 'numbers', 'quran', 'board'];
+            sections.forEach(s => {
+                document.getElementById(`sec-${s}`).classList.add('hidden');
+                const navBtn = document.getElementById(`nav-${s}`);
+                navBtn.className = 'nav-tab kid-btn flex flex-col items-center justify-center p-3 rounded-2xl bg-white text-slate-700 hover:bg-pink-50 font-extrabold border-2 border-pink-200';
+            });
+
+            document.getElementById(`sec-${secName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`nav-${secName}`);
+
+            const activeStyles = {
+                home: 'bg-gradient-to-r from-candy-pink to-candy-purple text-white border-pink-300',
+                arabic: 'bg-candy-pink text-white border-pink-300',
+                english: 'bg-candy-purple text-white border-purple-300',
+                numbers: 'bg-candy-sky text-white border-sky-300',
+                quran: 'bg-emerald-500 text-white border-emerald-300',
+                board: 'bg-amber-400 text-amber-950 border-amber-300'
+            };
+
+            activeBtn.className = `nav-tab kid-btn flex flex-col items-center justify-center p-3 rounded-2xl font-extrabold border-2 ${activeStyles[secName]}`;
+
+            if (secName === 'arabic') resizeTraceCanvas('ar');
+            if (secName === 'english') resizeTraceCanvas('en');
+            if (secName === 'numbers') resizeTraceCanvas('num');
+            if (secName === 'board') resizeFreeBoard();
+        }
+
+        // ==================== SPEECH SYNTHESIS ====================
+        function speakText(text, lang) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            utterance.rate = 0.85;
+            utterance.pitch = 1.12;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopSpeech() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+        }
+
+        function speakCurrentArabic() {
+            speakText(`${currentArObj.letter} ... ${currentArObj.word}`, 'ar-SA');
+        }
+
+        function speakCurrentEnglish() {
+            speakText(`${currentEnObj.upper} ... ${currentEnObj.word}`, 'en-US');
+        }
+
+        // ==================== SECTION 3: ARABIC LOGIC ====================
+        function renderArabicGrid() {
+            const grid = document.getElementById('arabic-letters-grid');
+            grid.innerHTML = ARABIC_LETTERS.map((item, idx) => {
+                const isDaniaLetter = item.letter === 'د';
+                const extraRing = isDaniaLetter ? 'ring-2 ring-amber-400 bg-amber-50/60' : 'bg-white';
+                return `
+                    <button onclick="selectArabicLetter(${idx}, true)"
+                        class="kid-card ${extraRing} hover:bg-pink-50 border-2 border-pink-200 rounded-2xl p-3 flex flex-col items-center justify-center">
+                        <span class="text-3xl sm:text-4xl font-black text-candy-pink">${item.letter}</span>
+                        <span class="text-lg mt-0.5">${item.emoji}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectArabicLetter(index, shouldSpeak) {
+            currentArObj = ARABIC_LETTERS[index];
+            document.getElementById('ar-big-letter').textContent = currentArObj.letter;
+            document.getElementById('ar-word-emoji').textContent = currentArObj.emoji;
+            document.getElementById('ar-word-text').textContent = currentArObj.word;
+            document.getElementById('ar-letter-name').textContent = currentArObj.name;
+
+            // Rotate Dania's companion photo per letter group for variety!
+            const companionPhotos = [
+                'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1242.heif',
+                '95606.jpg',
+                '99793.heic',
+                'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_15596.jpg'
+            ];
+            const chosenPhoto = companionPhotos[index % companionPhotos.length];
+            document.getElementById('ar-dania-companion').src = chosenPhoto;
+
+            const cheerEl = document.getElementById('ar-dania-cheer');
+            if (currentArObj.letter === 'د') {
+                cheerEl.textContent = 'حرف الدال هو أول حرف في اسمكِ الجميل "دانية" يا أميرتي! 👑';
+            } else {
+                cheerEl.textContent = `أحسنتِ يا دانية! هيا نكتب حرف (${currentArObj.letter}) معاً ✨`;
+            }
+
+            traceConfigs.ar.guide = currentArObj.letter;
+            clearTraceCanvas('ar');
+
+            if (shouldSpeak) speakCurrentArabic();
+        }
+
+        // ==================== SECTION 4: ENGLISH LOGIC ====================
+        function renderEnglishGrid() {
+            const grid = document.getElementById('english-letters-grid');
+            grid.innerHTML = ENGLISH_LETTERS.map((item, idx) => {
+                const isDaniaLetter = item.upper === 'D';
+                const extraRing = isDaniaLetter ? 'ring-2 ring-candy-pink bg-pink-50/70' : 'bg-white';
+                return `
+                    <button onclick="selectEnglishLetter(${idx}, true)"
+                        class="kid-card ${extraRing} hover:bg-purple-50 border-2 border-purple-200 rounded-2xl p-3 flex flex-col items-center justify-center">
+                        <span class="text-2xl sm:text-3xl font-bold text-candy-purple">${item.upper}${item.lower}</span>
+                        <span class="text-lg mt-0.5">${item.emoji}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectEnglishLetter(index, shouldSpeak) {
+            currentEnObj = ENGLISH_LETTERS[index];
+            document.getElementById('en-big-letter').textContent = `${currentEnObj.upper} ${currentEnObj.lower}`;
+            document.getElementById('en-word-emoji').textContent = currentEnObj.emoji;
+            document.getElementById('en-word-text').textContent = currentEnObj.word;
+            document.getElementById('en-word-ar').textContent = currentEnObj.ar;
+
+            const thumbEl = document.getElementById('en-dania-word-thumb');
+            if (currentEnObj.isDania) {
+                thumbEl.classList.remove('hidden');
+            } else {
+                thumbEl.classList.add('hidden');
+            }
+
+            // Alternate Dania's garden and school photos
+            const enPhotos = [
+                'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_15635.jpg',
+                'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_15596.jpg',
+                '95606.jpg'
+            ];
+            document.getElementById('en-dania-companion').src = enPhotos[index % enPhotos.length];
+
+            traceConfigs.en.guide = `${currentEnObj.upper} ${currentEnObj.lower}`;
+            clearTraceCanvas('en');
+
+            if (shouldSpeak) speakCurrentEnglish();
+        }
+
+        // ==================== SECTION 5: NUMBERS LOGIC ====================
+        function renderNumbersGrid() {
+            const grid = document.getElementById('numbers-grid');
+            grid.innerHTML = NUMBERS_DATA.map((item, idx) => `
+                <button onclick="selectNumber(${idx}, true)"
+                    class="kid-card bg-white hover:bg-sky-50 border-2 border-sky-200 rounded-2xl p-2.5 flex flex-col items-center justify-center">
+                    <span class="text-2xl font-black text-sky-600">${item.ar}</span>
+                    <span class="text-sm font-english font-bold text-amber-500">${item.val}</span>
+                </button>
+            `).join('');
+        }
+
+        function selectNumber(index, shouldSpeak) {
+            currentNumObj = NUMBERS_DATA[index];
+            document.getElementById('num-ar-big').textContent = currentNumObj.ar;
+            document.getElementById('num-ar-word').textContent = `${currentNumObj.arWord} 🔊`;
+            document.getElementById('num-en-big').textContent = currentNumObj.val;
+            document.getElementById('num-en-word').textContent = `${currentNumObj.enWord} 🔊`;
+
+            // Alternate Dania's blocks & play photos
+            const playPhotos = [
+                'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1737.heif',
+                'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1213.heif',
+                '99897.heic'
+            ];
+            document.getElementById('num-dania-companion').src = playPhotos[index % playPhotos.length];
+
+            const box = document.getElementById('counting-objects-box');
+            let emojisHTML = '';
+            for (let i = 1; i <= currentNumObj.val; i++) {
+                emojisHTML += `
+                    <button onclick="speakText('${i}', 'ar-SA'); this.classList.add('scale-125')"
+                            class="hover:scale-125 transition-transform p-1 rounded-xl hover:bg-amber-50" title="اضغطي للعد">
+                        ${currentNumObj.emoji}
+                    </button>
+                `;
+            }
+            box.innerHTML = emojisHTML;
+
+            traceConfigs.num.guide = `${currentNumObj.ar}   ${currentNumObj.val}`;
+            clearTraceCanvas('num');
+
+            if (shouldSpeak) {
+                speakText(currentNumObj.arWord, 'ar-SA');
+            }
+        }
+
+        // ==================== SECTION 6: QURAN LOGIC ====================
+        function renderQuranTabs() {
+            const container = document.getElementById('surah-tabs');
+            container.innerHTML = QURAN_SURAHS.map((s, idx) => `
+                <button onclick="selectSurah(${idx})" id="surah-btn-${idx}"
+                    class="px-3.5 py-2 rounded-xl font-quran font-bold text-sm sm:text-base border-2 transition kid-btn bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-100">
+                    ${s.name}
+                </button>
+            `).join('');
+        }
+
+        function selectSurah(index) {
+            stopSpeech();
+            currentSurahObj = QURAN_SURAHS[index];
+
+            QURAN_SURAHS.forEach((_, idx) => {
+                const btn = document.getElementById(`surah-btn-${idx}`);
+                if (idx === index) {
+                    btn.className = 'px-3.5 py-2 rounded-xl font-quran font-bold text-sm sm:text-base border-2 transition kid-btn bg-emerald-600 text-white border-emerald-700';
+                } else {
+                    btn.className = 'px-3.5 py-2 rounded-xl font-quran font-bold text-sm sm:text-base border-2 transition kid-btn bg-white text-emerald-800 border-emerald-200 hover:bg-emerald-100';
+                }
+            });
+
+            document.getElementById('surah-title').textContent = currentSurahObj.name;
+            document.getElementById('surah-meaning').textContent = currentSurahObj.meaning;
+
+            const versesDiv = document.getElementById('surah-verses');
+            versesDiv.innerHTML = currentSurahObj.verses.map(v => `
+                <div onclick="speakText('${v.replace(/﴿.*?﴾/g, '')}', 'ar-SA')"
+                     class="cursor-pointer p-3 rounded-2xl bg-emerald-50/70 hover:bg-emerald-100 border border-emerald-200/80 transition font-quran text-2xl sm:text-3xl text-slate-900 leading-loose">
+                    ${v}
+                </div>
+            `).join('');
+        }
+
+        function readFullSurah() {
+            const cleanText = currentSurahObj.verses.map(v => v.replace(/﴿.*?﴾/g, '')).join(' ، ');
+            speakText(`بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ . ${cleanText}`, 'ar-SA');
+        }
+
+        function completeSurahReward() {
+            speakText('ما شاء الله يا دانية! بارك الله فيكِ وحفظكِ', 'ar-SA');
+            addStars(3, `ما شاء الله يا أميرتنا دانية! بارك الله فيكِ على حفظ ${currentSurahObj.name} 🌟`, '99793.heic');
+        }
+
+        // ==================== CANVAS DRAWING & TRACING ====================
+        function setupAllCanvases() {
+            ['ar', 'en', 'num'].forEach(key => {
+                const canvas = document.getElementById(`${key}-trace-canvas`);
+                traceConfigs[key].canvas = canvas;
+                traceConfigs[key].ctx = canvas.getContext('2d');
+                resizeTraceCanvas(key);
+                attachDrawingEvents(canvas, () => ({
+                    color: traceConfigs[key].color,
+                    size: 14,
+                    erase: false
+                }));
+            });
+
+            freeCanvas = document.getElementById('free-board-canvas');
+            freeCtx = freeCanvas.getContext('2d');
+            resizeFreeBoard();
+            attachDrawingEvents(freeCanvas, () => ({
+                color: freeColor,
+                size: freeSize,
+                erase: isErasing
+            }));
+        }
+
+        function resizeTraceCanvas(key) {
+            const cfg = traceConfigs[key];
+            if (!cfg.canvas) return;
+            const rect = cfg.canvas.parentElement.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return;
+            cfg.canvas.width = rect.width;
+            cfg.canvas.height = rect.height;
+            drawTraceGuide(key);
+        }
+
+        function drawTraceGuide(key) {
+            const cfg = traceConfigs[key];
+            const ctx = cfg.ctx;
+            const w = cfg.canvas.width;
+            const h = cfg.canvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            ctx.save();
+            ctx.strokeStyle = '#E2E8F0';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([8, 8]);
+            ctx.beginPath();
+            ctx.moveTo(20, h * 0.72);
+            ctx.lineTo(w - 20, h * 0.72);
+            ctx.stroke();
+            ctx.restore();
+
+            ctx.save();
+            ctx.font = cfg.font;
+            ctx.fillStyle = 'rgba(155, 93, 229, 0.16)';
+            ctx.strokeStyle = 'rgba(155, 93, 229, 0.35)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([6, 6]);
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(cfg.guide, w / 2, h / 2);
+            ctx.strokeText(cfg.guide, w / 2, h / 2);
+            ctx.restore();
+        }
+
+        function clearTraceCanvas(key) {
+            drawTraceGuide(key);
+        }
+
+        function setTraceColor(key, hex) {
+            traceConfigs[key].color = hex;
+        }
+
+        function rewardTracing(key) {
+            speakText('أحسنتِ يا دانية! خطكِ جميل جداً', 'ar-SA');
+            addStars(1, `خطكِ جميل جداً يا دانية! (+1 ⭐)`, 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1074.heif');
+            clearTraceCanvas(key);
+        }
+
+        // Free Board Controls
+        function resizeFreeBoard() {
+            if (!freeCanvas) return;
+            const rect = freeCanvas.parentElement.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return;
+            const tempImg = freeCanvas.toDataURL();
+            freeCanvas.width = rect.width;
+            freeCanvas.height = rect.height;
+            const img = new Image();
+            img.onload = () => freeCtx.drawImage(img, 0, 0);
+            img.src = tempImg;
+        }
+
+        function setFreeColor(hex) {
+            freeColor = hex;
+            isErasing = false;
+            document.getElementById('btn-eraser').classList.remove('ring-2', 'ring-pink-400', 'bg-pink-100');
+        }
+
+        function setFreeSize(sz) {
+            freeSize = sz;
+        }
+
+        function setFreeBoardEraser() {
+            isErasing = !isErasing;
+            const btn = document.getElementById('btn-eraser');
+            if (isErasing) {
+                btn.classList.add('ring-2', 'ring-pink-400', 'bg-pink-100');
+            } else {
+                btn.classList.remove('ring-2', 'ring-pink-400', 'bg-pink-100');
+            }
+        }
+
+        function clearFreeBoard() {
+            freeCtx.clearRect(0, 0, freeCanvas.width, freeCanvas.height);
+        }
+
+        function stampDaniaName() {
+            freeCtx.save();
+            freeCtx.font = 'bold 46px Cairo, Fredoka, sans-serif';
+            freeCtx.fillStyle = '#FF6B9E';
+            freeCtx.textAlign = 'center';
+            freeCtx.fillText('👑 دانية • Dania 💖', freeCanvas.width / 2, 70);
+            freeCtx.restore();
+            speakText('دانية', 'ar-SA');
+        }
+
+        function downloadDrawing() {
+            const exportCanvas = document.createElement('canvas');
+            exportCanvas.width = freeCanvas.width;
+            exportCanvas.height = freeCanvas.height;
+            const eCtx = exportCanvas.getContext('2d');
+            eCtx.fillStyle = '#FFFFFF';
+            eCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+            eCtx.drawImage(freeCanvas, 0, 0);
+
+            const link = document.createElement('a');
+            link.download = `لوحة_الفنانة_دانية_Dania.png`;
+            link.href = exportCanvas.toDataURL('image/png');
+            link.click();
+
+            addStars(2, `تم حفظ لوحة الفنانة دانية الرائعة! (+2 ⭐)`, 'ca383a6a-5b21-4f04-953c-883451f56cc5-1_all_1074.heif');
+        }
+
+        function attachDrawingEvents(canvas, getBrushStyle) {
+            const ctx = canvas.getContext('2d');
+            let drawing = false;
+
+            function getCoords(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+
+            function startDraw(e) {
+                drawing = true;
+                const pos = getCoords(e);
+                const style = getBrushStyle();
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.lineWidth = style.erase ? 28 : style.size;
+                ctx.globalCompositeOperation = style.erase ? 'destination-out' : 'source-over';
+                ctx.strokeStyle = style.color;
+            }
+
+            function moveDraw(e) {
+                if (!drawing) return;
+                if (e.cancelable) e.preventDefault();
+                const pos = getCoords(e);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            }
+
+            function endDraw() {
+                if (!drawing) return;
+                drawing = false;
+                ctx.closePath();
+                ctx.globalCompositeOperation = 'source-over';
+            }
+
+            canvas.addEventListener('mousedown', startDraw);
+            canvas.addEventListener('mousemove', moveDraw);
+            window.addEventListener('mouseup', endDraw);
+
+            canvas.addEventListener('touchstart', startDraw, { passive: false });
+            canvas.addEventListener('touchmove', moveDraw, { passive: false });
+            canvas.addEventListener('touchend', endDraw);
+        }
+    </script>
+</body>
+</html>
